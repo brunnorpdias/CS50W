@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Google Advanced Search</title>
+        <link rel="icon" href="google_icon.png">
+        <style>
+            div {
+                font-family: arial, sans-serif;
+            }
+            a {
+                font-size: 13px;
+                color: black;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            span {
+                margin: 0;
+            }
+            .left span {
+                font-size: 13px;
+                color: #222222;
+                float: left;
+            }
+            .center span {
+                font-size: 13px;
+                text-align: center;
+                color: #222222;
+                float: left;
+            }
+            .right span {
+                font-family: monospace;
+                font-size: 11px;
+                color: #666;
+                white-space: pre;
+            }
+            .left .container {
+                padding: 7.45px 0;
+            }
+            .right .container {
+                padding: 8.2px 0 8px 16.4px;
+            }
+            .frame {
+                height: 60px;
+                width: fit-content;
+                float: left;
+                display: flex;
+                align-items: center;
+                padding: 0 15px;
+            }
+            label {
+                color: rgb(217, 48, 37);
+                font-family: arial, sans-serif;
+                font-size: 20px;
+                font-weight: 400;
+            }
+            hr {
+                border-bottom: 1px solid rgb(235, 235, 235);
+                border-top: 0;
+            }
+            .row {
+                display: block;
+                min-width: 720px;
+                min-height: 42px;
+            }
+            .left {
+                width: 182.4px;
+                height: 42px;
+                float: left;
+            }
+            .center {
+                width: 570px;
+                height: 41px;
+                float: left;
+                display: block;
+            }
+            .right {
+                height: 42px;
+                float: left;
+                font-size: 11px;
+                color: #555555;
+            }
+            input[type=text] {
+                font-family: arial, sans-serif;
+                font-size: 13px;
+                color: black;
+                background-color: white;
+                border: 1px solid #d9d9d9;
+                border-top: 1px solid #c0c0c0;
+                height: 25px;
+                width: 566px;
+                padding: 1px 2px;
+            }
+            input[type=submit] {
+                min-width: 120px;
+                height: 30px;
+                padding: 0 12px 0 12px;
+                align-items: center;
+                color: #fff;
+                font-size: 11px;
+                font-weight: 700;
+                background-color: #4d90fe;
+                background-image: -webkit-linear-gradient(top, #4d90fe, #4787ed);
+                border: 1px solid #3079ed;
+                border-radius: 2px;
+            }
+            input:focus {
+                outline: none;
+            }
+        </style>
+    </head>
+    <body style="margin: 0;">
+        <div style="height: 60px; background-color: rgb(241, 241, 241);">
+            <div class="frame">
+                <a href="google.html" title="Go to Google Home" aria-label="Google">
+                    <img src="google_logo.png" alt="Google" style="height: 30.5px;">
+                </a>
+            </div>
+            <div class="frame" style="float: right; padding-right: 31px;">
+                <a href="google.html">Home</a>
+            </div>
+        </div>
+
+        <div style="margin: 25px 35px;">
+            <label style="margin-left: 10px;">Advanced Search</label>
+        </div>
+
+        <hr>
+
+        <div style="margin: 40px 0 0 45px; align-items: top;">
+            <form action="https:/google.com/search?">
+                <div class="row">
+                    <div class="left">
+                        <div style="padding: 5.75px 0;">
+                            <span style="font-size: 16px; color: rgb(51,51,51)">Find pages with...</span>
+                        </div>
+                    </div>
+                    <div class="center"></div>
+                    <div style="margin: 0px; float: left;">
+                        <div style="padding: 4.5px 0 0 5px;">
+                            <span style="font-size: 13px; font-weight: 700; color: #777777;">To do this in the search box.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="left">
+                        <div class="container">
+                            <span>all these words:</span>
+                        </div>
+                    </div>
+                    <div class="center">
+                        <div class="container">
+                            <input type="text" name="as_q" autocomplete="off"> <!--normal query-->
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="container">
+                            Type the important words: 
+                            <span>tri-colour rat terrier</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="left">
+                        <div class="container">
+                            <span>this exact word or phrase:</span>
+                        </div>
+                    </div>
+                    <div class="center">
+                        <div class="container">
+                            <input type="text" name="as_epq" autocomplete="off"> <!--exact query-->
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="container">
+                            Put exact words in quotes: 
+                            <span>"rat terrier"</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="left">
+                        <div class="container">
+                            <span>any of these words:</span>
+                        </div>
+                    </div>
+                    <div class="center">
+                        <div class="container">
+                            <input type="text" name="as_oq" autocomplete="off"> <!--OR query-->
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="container">
+                            Type <span>OR</span> between all the words you want: 
+                            <span>miniature OR standard</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="left">
+                        <div class="container">
+                            <span>none of these words:</span>
+                        </div>
+                    </div>
+                    <div class="center">
+                        <div class="container">
+                            <input type="text" name="as_eq" autocomplete="off"> <!--excludent query-->
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="container" style="padding-top: 2px;">
+                            Put a minus sign just before words that you don't want: 
+                            <br>
+                            <span>-rodent, -"Jack Russell"</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="left" style="width: 755px; text-align: right;">
+                        <div class="container">
+                            <input type="submit" name="Advanced Search" value="Advanced Search">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

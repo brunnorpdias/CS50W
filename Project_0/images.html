@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Google Images</title>
+        <link rel="icon" href="google_icon.png">
+        <style>
+            div {
+                font-family: arial, sans-serif;
+                color: black;
+                font-size: 13px;
+            }
+                input[type=text] {
+                font-family: Arial, sans-serif;
+                color: black;
+                font-size: 16px;
+                padding: 4px 0 4px 47px;
+                background-color: white;
+                border: 1px solid #dfe1e5;
+                width: 460px;
+                height: 36px;
+                border-radius: 24px;
+                background-image: url(Search.png); 
+                background-position: 17px;
+                background-size: 14px; 
+                background-repeat: no-repeat
+            }
+            input[type=submit] {
+                height: 36px;
+                font-family: arial, sans-serif;
+                font-size: 14px;
+                color: #5F6368;
+                background-color: #f2f2f2;
+                border: 1px solid #f2f2f2;
+                border-radius: 4px;
+                padding: 0px 16px;
+                margin: 11px 4px;
+            }
+            a {
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            input[type=submit]:hover {
+                color: black;
+                border: 1px solid lightgray;
+            }
+            input, button:focus {
+                outline: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="text-align: center;">
+            <div style="height: 89px; text-align: right; margin: 23px 23px 0 0; font-size: 13px;">
+                <div style="float: right;">
+                    <a href="google.html" style="color: black;">Google</a>
+                </div>
+            </div>
+            <div style="margin-top: 86px; height: 92px;">
+                <div style="width: 272px; height: 92px; background-image: url(google_logo.png); background-size: 272px; margin: auto; position: relative;">
+                    <div style="font-size: 16px; color: #4285f4; font-weight: 500; position: absolute; bottom: 0px; right: 0px;">
+                        <span>images</span>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 23.5px;">
+                <form action="https://www.google.com.br/search?tbm=isch&">
+                    <div>
+                        <input name="tbm" value="isch" type="hidden">
+                        <input type="text" name="as_q" autocomplete="off">
+                        <button type="submit" style="background-color: transparent; border: none;">
+                            <img src="Search_color.png" alt="Search" style="width: 17px;">
+                        </button>
+                    </div>
+                    <div style="height: 40px; width: fit-content;">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
