@@ -18,7 +18,7 @@ class Flight:
             return f"I'm sorry {name}, there aren't any seats on this flight"
         else:
             self.passengers.append(name)
-            return f"Seat reserved! Thanks for flying with us {name}"
+            return f"Seat reserved! Thanks for flying with us, {name}"
 
     def open_seats(self):
         return self.capacity - len(self.passengers)
