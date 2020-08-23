@@ -24,3 +24,21 @@ def getpage(request, page):
     {"content":markdown2.markdown(util.get_entry(page)), "page":page, "form":Search()}
     )
 
+def search(request):
+    query = request.GET.urlencode().split("=")
+    searched = []
+    for i in query:
+        if i is not "query":
+            query = i
+    for i in util.list_entries():
+        if i.lower() == query:
+            return getpage(request, query)
+        else:
+            if i.lower().find(query) is not -1:
+                searched.append(i)
+    if not searched:
+        return getpage(request, query)
+    else:
+        return render(request, "encyclopedia/search.html",
+        {"results":searched}
+        )
