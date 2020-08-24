@@ -3,6 +3,10 @@
 {% block title %}
     {{ page }}
 {% endblock %}
+ 
+{% block nav %}
+    <a href="{% url 'wiki:edit' %}{{ page }}">Edit</a>
+{% endblock %}
 
 {% block body %}
 <div>
