@@ -1,0 +1,130 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+
+    {% if message %}
+        <div style="text-align: center; border: 2px solid black; border-radius: 5px; height: 50px; background-color: darkred; width: auto; color: white; margin: 25px;">
+            <h2> {{ message }} </h2>
+        </div>
+    {% endif %}
+
+    <div style="padding: 50px; display: grid;">
+        <div>
+            <div style="float: left; height: 500px; width: 500px; display: flex;">
+                <img src="{{ item.image }}" alt="No image available" style="display: block; max-width: 450px; margin: auto; margin: auto;">
+            </div>
+
+            <div style="float: left; padding: 25px; margin-right: auto; display: grid; width: fit-content;">
+                <div>
+                    <h4 style="font-weight: bold;">{{ item.name }}</h4>
+                </div>
+                <div>
+                    {{ item.description }}
+                </div>
+                <div style="margin-top: 15px;">
+                    <span style="font-weight: bold;">Starting bid:</span> $ {{ item.start_bid }}
+                </div>
+                <div style="margin-top: 15px;">
+                    <span style="font-weight: bold;">Condition:</span> {{ item.condition }}
+                </div>
+                <div style="margin-top: 15px;">
+                    <span style="font-weight: bold;">Available:</span> {{ item.availability }}
+                </div>
+                <div style="margin-top: 15px;">
+                    <span style="font-weight: bold;">Seller:</span> {{ seller }}
+                </div>
+
+                {% if user.is_authenticated and user.id != item.user_id %}
+                    <div style="margin-top: 15px;">
+                        <form action="{% url 'change_watchlist' item.id %}" method="POST">
+                            {% csrf_token %}
+                            <input class="form-control" type="submit" style="width: 200px;" value="{{ watchlist }}">
+                        </form>
+                    </div>
+                    
+                    <div style="margin-top: 7.5px;">
+                        <form action="{% url 'bid' item.id %}" method="POST">
+                            {% csrf_token %}
+                            <input class="form-control" type="number" name="quantity" placeholder="Qnt." style="width: 95px; float: left;" min="1" max="{{ item.availability }}" required>
+                            <input class="form-control" type="number" name="bid" placeholder="Bid" style="width: 95px; float: left; margin-left: 10px;" step="0.01" min="{{ min_bid }}" required>
+                            <input class="btn btn-primary" type="submit" style="width: 85px; float: left; margin-left: 10px;" value="Bid">
+                        </form>
+                    </div>
+
+                {% endif %}
+
+                {%   if status == 1 and user.id == item.user_id and highest_bidder %}
+                    <div style="margin-top: 15px;">
+                        <span style="font-weight: bold;">Current bid is:</span> ${{ min_bid }} by {{ highest_bidder }}
+                    </div>
+                    <form action="{% url 'close' item.id %}" method="POST">
+                        {% csrf_token %}
+                        <input class="form-control" type="submit" value="CLOSE BIDDING" style="width: 200px; background-color: darkred; color: white; font-weight: bolder; margin-top: 30px; border: 2px solid black;">
+                    </form>
+
+                {% elif status == 1 and user.id == item.user_id %}
+                    <div style=" margin-top: 30px">
+                        <span style="color: darkred; width: 200px; font-weight: bolder;">No bids yet...</span>
+                    </div>
+                    <form action="{% url 'close' item.id %}" method="POST">
+                        {% csrf_token %}
+                        <input class="form-control" type="submit" value="CLOSE BIDDING" style="width: 200px; background-color: darkred; color: white; font-weight: bolder; margin-top: 30px; border: 2px solid black;">
+                    </form>
+                
+                {% elif status == 1 and user.id == highest_bidder_id %}
+                    <div style="margin-top: 15px;">
+                        <span style="font-weight: bold;">You have the highest bid with </span> ${{ min_bid }}
+                    </div>
+
+                {% elif status == 1 and user.is_authenticated and highest_bidder %}
+                    <div style="margin-top: 15px;">
+                        <span style="font-weight: bold;">Current bid is:</span> ${{ min_bid }} by {{ highest_bidder }}
+                    </div>
+
+                {% elif status == 0 and user.id == item.user_id %}
+                    <div style=" margin-top: 30px">
+                        <span style="color: darkred; width: 200px; font-weight: bolder;">Bids are closed... Sold for ${{ min_bid }} </span>
+                    </div>
+
+                {% elif status == 0 and user.id == highest_bidder_id %}
+                    <div style=" margin-top: 30px">
+                        <span style="color: darkred; width: 200px; font-weight: bolder;">Sold to you for ${{ min_bid }} </span>
+                    </div>
+
+                {% elif status == 0 and user.is_authenticated %}
+                    <div style=" margin-top: 30px">
+                        <span style="color: darkred; width: 200px; font-weight: bolder;">Bids are closed... Sold for ${{ min_bid }} to {{ highest_bidder }}</span>
+                    </div>
+
+                {% endif %}
+            </div>
+        </div>
+        <div>
+            <hr>
+        </div>
+
+        <div style="display: grid; margin-top: 25px;">
+            <H3>Comments</H3>
+            <form action="{% url 'comment' item.id %}" method="POST" style="margin-top: 25px;">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea class="form-control" style="width: 80%; height: 80px; float: left;" name="comment" placeholder="Comments here..." required></textarea>
+                    <input class="btn btn-primary" type="submit" style="float: left; margin-left: 15px; height: 80px;" value="Comment">
+                </div>
+            </form>
+        </div>
+
+        {% for comment in comments %}
+            <div style="margin-top: 25px">
+                <div>
+                    <span style="text-decoration: underline; font-weight: bold;"> {{ comment.username }} </span>
+                </div>
+                <div>
+                    {{ comment.comment }}
+                </div>
+            </div>
+        {% empty %}
+
+        {% endfor %}
+    </div>
+{% endblock %}
