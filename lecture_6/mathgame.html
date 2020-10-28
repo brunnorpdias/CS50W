@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Math Game</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <script type="text/babel">
+            class App extends React.Component {
+                constructor(props) {
+                    super(props);
+                    this.state = {
+                        num1: 1,
+                        num2: 1,
+                        response: "",
+                        score: 0,
+                        message: ""
+                    };
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <div>{this.state.num1} + {this.state.num2}</div>
+                            <input onKeyPress={this.inputKeyPress} onChange={this.updateResponse} value={this.state.response}/>
+                            <div>Score: {this.state.score}</div>
+                            <div>{this.state.message}</div>
+                        </div>
+                    );
+                }
+                
+                updateResponse = (event) => {
+                    this.setState({
+                        response: event.target.value
+                    });
+                }
+
+                inputKeyPress = (event) => {
+                    if (event.key === 'Enter') {
+                        if (parseInt(this.state.response) === this.state.num1 + this.state.num2) {
+                            this.setState(state => ({
+                                score: state.score + 1,
+                                num1: Math.ceil(Math.random() * 10),
+                                num2: Math.ceil(Math.random() * 10),
+                                response: "",
+                                message: ""
+                            }));
+                        } else {
+                            this.setState(state => ({
+                                score: state.score - 1,
+                                response: "",
+                                message: "Try again, wrong answer"
+                            }));
+                        }
+                    }
+                }
+            }
+
+            ReactDOM.render(<App/>, document.querySelector('#app'))
+        </script>
+    </body>
+</html>

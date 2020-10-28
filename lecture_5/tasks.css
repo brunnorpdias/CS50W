@@ -1,0 +1,14 @@
+body {
+    font-family: sans-serif;
+    font-size: larger;
+}
+
+input[type=text] {
+    width: 400px;
+    height: 35px;
+    font-size: 20px;
+}
+
+input[type=submit] {
+    height: 37px;
+}
